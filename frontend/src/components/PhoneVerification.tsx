@@ -32,13 +32,23 @@ function getErrorMessage(error: unknown, fallback: string): string {
 }
 
 export default function PhoneVerification() {
-  const [name, setName] = useState('John Doe');
-  const [phone, setPhone] = useState('+919999999999');
+  const storedUser = readStoredUser();
+  const [name, setName] = useState(storedUser?.name || 'John Doe');
+  const [phone, setPhone] = useState(storedUser?.phone || '+919999999999');
   const [code, setCode] = useState('');
   const [token, setToken] = useState(() => localStorage.getItem(tokenKey) || '');
-  const [user, setUser] = useState<User | null>(() => readStoredUser());
+  const [user, setUser] = useState<User | null>(() => storedUser);
   const [message, setMessage] = useState('Register a user to begin the verification flow.');
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+
+    setName(user.name);
+    setPhone(user.phone);
+  }, [user]);
 
   useEffect(() => {
     if (!token) {
