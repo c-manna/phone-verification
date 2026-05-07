@@ -1,0 +1,13 @@
+project_name        = "phone-verification"
+environment         = "dev"
+aws_region          = "ap-south-1"
+lambda_zip_path    = "../backend/dist/lambda.zip"
+lambda_memory_size  = 512
+lambda_timeout      = 30
+mongodb_uri        = "mongodb+srv://username:password@cluster.mongodb.net/phone-verification"
+jwt_secret         = "change_this_secret"
+jwt_expires_in     = "1d"
+twilio_account_sid = "your_twilio_account_sid"
+twilio_auth_token  = "your_twilio_auth_token"
+twilio_phone_number = "+1234567890"
+frontend_origin    = "http://localhost:5173"
